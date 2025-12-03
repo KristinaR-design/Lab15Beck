@@ -14,7 +14,7 @@ public class User {
     private String username;
 
     @Column(nullable = false)
-    private String password; // хэш
+    private String password;
 
     public Long getId() {
         return id;

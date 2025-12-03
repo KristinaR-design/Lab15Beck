@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/cars")
+@RequestMapping("/api/cars")
 @CrossOrigin(origins = {
         "http://localhost:5173",
         "https://labtest15.netlify.app"
