@@ -20,7 +20,6 @@ import java.util.List;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    // бин для шифрования пароля
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -35,12 +34,10 @@ public class SecurityConfig {
                         sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .authorizeHttpRequests(auth -> auth
-                        // ВРЕМЕННО открываем все запросы
+                        // всё разрешаем
                         .anyRequest().permitAll()
                 );
-
-        // JWT-фильтр пока не подключаем, чтобы он не мешал
-        // .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+        // ВАЖНО: никакого addFilterBefore здесь нет
 
         return http.build();
     }
@@ -50,7 +47,7 @@ public class SecurityConfig {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowedOrigins(List.of(
                 "http://localhost:5173",
-                "https://labtest15.netlify.app"
+                "https://labtest15.netlify.app"   // твой фронт
         ));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("Authorization", "Content-Type"));
